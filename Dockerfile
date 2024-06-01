@@ -1,7 +1,14 @@
-FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-ARG DEPENDENCY=target/dependency
-COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY ${DEPENDENCY}/META-INF /app/META-INF
-COPY ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","br.com.siecola.aws_project01.AwsProject01Application"]
+# Use uma imagem base do OpenJDK
+FROM openjdk:17-jdk-alpine
+
+# Configure o diretório de trabalho
+WORKDIR /app
+
+# Copie o build do Gradle para o container
+COPY build/libs/*.jar app.jar
+
+# Exponha a porta que a aplicação irá usar
+EXPOSE 8080
+
+# Comando para rodar a aplicação
+ENTRYPOINT ["java", "-jar", "app.jar"]

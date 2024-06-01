@@ -6,4 +6,4 @@ pluginManagement {
 	}
 }
 //TODO - esse valor deve ser o mesmo nome do seu repositório no Docker Hub
-rootProject.name = 'curso_aws_project01'
+rootProject.name = 'curso_aws_project_01'
